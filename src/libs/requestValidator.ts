@@ -1,7 +1,7 @@
 const validEmail = (email: string) => /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(email)
 const validPassword = (password: string) => /^(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,30}$/.test(password)
 const validPhone = (phone: string) => /^(?:\+234|234|0)(?:\d{10})$/.test(phone)
-const validName = (name: string) => /^[a-zA-Z]{2,}(?: [a-zA-Z]+){2,}$/.test(name)
+const validName = (name: string) => /^[a-zA-Z]{2,}(?: [a-zA-Z]+){1,}$/.test(name)
 
 export const signupValidator = (payload) => {
   if (!validEmail(payload.email)) {
@@ -46,14 +46,14 @@ export const signupValidator = (payload) => {
 }
 
 export const loginValidator = (payload) => {
-  if (!validEmail(payload.email)) {
+  if (!payload.email || !validEmail(payload.email)) {
     return {
       error: true,
       message: 'Email is invalid',
     }
   }
 
-  if (!validPassword(payload.password)) {
+  if (!payload.password || !validPassword(payload.password)) {
     return {
       error: true,
       message: 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number and one special character',

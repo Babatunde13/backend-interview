@@ -1,5 +1,6 @@
 import * as request from 'supertest'
 
-const PORT = process.env.PORT || 8080
+console.log(process.env.PORT)
+const PORT = process.env.PORT || 3000
 
 export const testRequest = request(`http://localhost:${PORT}`)

@@ -9,19 +9,19 @@ services:
    volumes:
      - "./docker/dynamodb:/home/dynamodblocal/data"
    working_dir: /home/dynamodblocal
- app-node:
-    build: .
-    container_name: app-node
-    ports:
-      - "8080:8080"
-    depends_on:
-      - "dynamodb-local"
-    links:
-      - "dynamodb-local"
-    environment:
-      AWS_ACCESS_KEY_ID: 'fakeMyKeyId'
-      AWS_SECRET_ACCESS_KEY: 'fakeSecretAccessKey'
-      REGION: 'localhost'
-      DYNAMO_ENDPOINT: dynamodb-local:8000
-    env_file:
-      - .env
+#  app-node:
+#     build: .
+#     container_name: app-node
+#     ports:
+#       - "3000:3000"
+#     depends_on:
+#       - "dynamodb-local"
+#     links:
+#       - "dynamodb-local"
+#     environment:
+#       AWS_ACCESS_KEY_ID: 'fakeMyKeyId'
+#       AWS_SECRET_ACCESS_KEY: 'fakeSecretAccessKey'
+#       REGION: 'localhost'
+#       DYNAMO_ENDPOINT: dynamodb-local:8000
+#     env_file:
+#       - .env

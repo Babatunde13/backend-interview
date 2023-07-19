@@ -9,11 +9,10 @@ import {loginValidator, signupValidator} from '@libs/requestValidator'
 const registerHandler = async (
     event: APIGatewayProxyEvent,
 ): Promise<APIGatewayProxyResult> => {
-  event.body = JSON.parse(Buffer.from(event.body, 'base64').toString())
   try {
     const validationResp = signupValidator(event.body)
     if (validationResp.error) {
-      errorResponse({message: validationResp.message}, 400)
+      return errorResponse({message: validationResp.message}, 400)
     }
     const id = v4()
     const createUserResponse = await userService.createUser({
@@ -34,11 +33,10 @@ const registerHandler = async (
 const loginHandler = async (
     event: APIGatewayProxyEvent,
 ): Promise<APIGatewayProxyResult> => {
-  event.body = JSON.parse(Buffer.from(event.body, 'base64').toString())
   try {
     const validationResp = loginValidator(event.body)
     if (validationResp.error) {
-      errorResponse({message: validationResp.message}, 400)
+      return errorResponse({message: validationResp.message}, 400)
     }
     const loginResponse = await userService.login(
         validationResp.data.email,
